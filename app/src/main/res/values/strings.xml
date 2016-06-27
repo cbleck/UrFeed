@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UrFeed</string>
+    <string name="title_activity_detail">Detalle</string>
+    <string name="title_activity_select_feed">SelectFeed</string>
+</resources>

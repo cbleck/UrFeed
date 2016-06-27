@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- MINIATURA -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/imagen"
+            android:scaleType="centerCrop"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linea"
+            android:layout_marginTop="16dp" />
+
+        <!-- TITULO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Título"
+            android:id="@+id/titulo"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/imagen"
+            android:layout_alignTop="@+id/imagen"
+            android:layout_marginStart="16dp" />
+
+        <!-- DESCRIPCION -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Descripción"
+            android:id="@+id/descripcion"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@+id/icon"
+            android:layout_marginTop="16dp" />
+
+        <!-- LINEA DIVISORIA -->
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:id="@+id/linea"
+            android:background="#ffe9e9e9"
+            android:layout_below="@+id/descripcion" />
+
+        <!-- ICONO FORBES-->
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/icon"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/forbes" />
+
+        <!-- MARCA FORBES -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Forbes"
+            android:id="@+id/publisher"
+            android:layout_toEndOf="@+id/icon"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
