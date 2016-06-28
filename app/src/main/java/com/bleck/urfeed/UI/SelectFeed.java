@@ -40,7 +40,7 @@ public class SelectFeed extends AppCompatActivity {
 
         feedModelList = initializeFeed();
         // specify an adapter (see also next example)
-        mAdapter = new SelectFeedAdapter(feedModelList);
+        mAdapter = new SelectFeedAdapter(this, feedModelList);
         mRecyclerView.setAdapter(mAdapter);
     }
 

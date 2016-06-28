@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     Lista
      */
     private ListView listView;
+    private String URL_FEED;
 
     /*
     Adaptador
@@ -57,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String URL_FEED = getIntent().getStringExtra("com.bleck.feedurl");
+        if(getIntent() != null)
+            URL_FEED = getIntent().getStringExtra("com.bleck.feedurl");
+
         setTitle(URL_FEED);
 
         // Obtener la lista

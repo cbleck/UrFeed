@@ -22,7 +22,7 @@ public class Item {
     @Element(name="link")
     private String link;
 
-    @Element(name="content")
+    @Element(name="content", required = false)
     @Namespace(reference="http://search.yahoo.com/mrss/", prefix="media")
     private Content content;
 

@@ -169,6 +169,7 @@ public final class FeedDatabase extends SQLiteOpenHelper {
             entryMap.put(e.getTitle(), e);
         }
 
+        getWritableDatabase().execSQL("delete from "+ ScriptDatabase.ENTRADA_TABLE_NAME);
         /*
         #2  Obtener las entradas locales
          */
@@ -222,11 +223,14 @@ public final class FeedDatabase extends SQLiteOpenHelper {
         */
         for (Item e : entryMap.values()) {
             Log.i(TAG, "Insertado: titulo=" + e.getTitle());
+
+            String contenturl = (e.getContent() == null) ? "" : (e.getContent().getUrl() == null) ? "" : e.getContent().getUrl();
+
             insertarEntrada(
                     e.getTitle(),
                     e.getDescripcion(),
                     e.getLink(),
-                    e.getContent().getUrl()
+                    contenturl
             );
         }
         Log.i(TAG, "Se actualizaron los registros");
