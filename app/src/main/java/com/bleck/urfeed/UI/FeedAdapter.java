@@ -6,6 +6,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -25,23 +26,29 @@ public class FeedAdapter extends CursorAdapter {
     Etiqueta de Depuración
      */
     private static final String TAG = FeedAdapter.class.getSimpleName();
+    private String feedName;
+    private int iconImage;
 
     /**
      * View holder para evitar multiples llamadas de findViewById()
      */
     static class ViewHolder {
+        TextView publisher;
         TextView titulo;
         TextView descripcion;
         NetworkImageView imagen;
+        ImageView icon;
 
         int tituloI;
         int descripcionI;
         int imagenI;
     }
 
-    public FeedAdapter(Context context, Cursor c, int flags) {
+    public FeedAdapter(Context context, Cursor c,String feedName ,int iconImage ,int flags) {
         super(context, c, flags);
 
+        this.feedName = feedName;
+        this.iconImage = iconImage;
     }
 
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -55,6 +62,9 @@ public class FeedAdapter extends CursorAdapter {
         vh.titulo = (TextView) view.findViewById(R.id.titulo);
         vh.descripcion = (TextView) view.findViewById(R.id.descripcion);
         vh.imagen = (NetworkImageView) view.findViewById(R.id.imagen);
+
+        vh.publisher = (TextView) view.findViewById(R.id.publisher);
+        vh.icon = (ImageView) view.findViewById(R.id.icon);
 
         // Setear indices
         vh.tituloI = cursor.getColumnIndex(ScriptDatabase.ColumnEntradas.TITULO);
@@ -90,6 +100,12 @@ public class FeedAdapter extends CursorAdapter {
 
         // Volcar datos en el image view
         vh.imagen.setImageUrl(thumbnailUrl, imageLoader);
+
+        // Escribir el publisher
+        vh.publisher.setText(feedName);
+
+        // Mostrar imagen
+        vh.icon.setImageResource(iconImage);
 
     }
 }

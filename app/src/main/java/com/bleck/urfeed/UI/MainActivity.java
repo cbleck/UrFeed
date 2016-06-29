@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private ListView listView;
     private String URL_FEED;
+    private String feedName;
+    private int iconImage;
 
     /*
     Adaptador
@@ -58,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(getIntent() != null)
+        if(getIntent() != null) {
             URL_FEED = getIntent().getStringExtra("com.bleck.feedurl");
+            iconImage = getIntent().getIntExtra("com.bleck.feedimg",0);
+            feedName = getIntent().getStringExtra("com.bleck.feedname");
+        }
 
         setTitle(URL_FEED);
 
@@ -122,10 +127,12 @@ public class MainActivity extends AppCompatActivity {
                     )
             );
         } else {
-            Log.i(TAG, "La conexi�n a internet no est� disponible");
+            Log.i(TAG, "La conexión a internet no está disponible");
             adapter= new FeedAdapter(
                     this,
                     FeedDatabase.getInstance(this).obtenerEntradas(),
+                    feedName,
+                    iconImage,
                     SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             listView.setAdapter(adapter);
         }
@@ -148,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
             adapter = new FeedAdapter(
                     MainActivity.this,
                     cursor,
+                    feedName,
+                    iconImage,
                     SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 
             // Relacionar la lista con el adaptador

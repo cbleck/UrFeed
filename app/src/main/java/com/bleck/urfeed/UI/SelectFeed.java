@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -141,9 +142,10 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
 
     private List<FeedModel> initializeFeed(){
         List<FeedModel> fml = new ArrayList<>();
-        fml.add(new FeedModel("Forbes","http://www.forbes.com/most-popular/feed/",""));
-        fml.add(new FeedModel("Hipertextual","http://feed.hipertextual.com/",""));
-        fml.add(new FeedModel("Xataka","http://feeds.weblogssl.com/xataka2",""));
+        fml.add(new FeedModel("Forbes","http://www.forbes.com/most-popular/feed/",Integer.toString(R.drawable.forbes)));
+        fml.add(new FeedModel("Hipertextual","http://feed.hipertextual.com/",Integer.toString(R.drawable.hipertextual)));
+        fml.add(new FeedModel("Xataka","http://feeds.weblogssl.com/xataka2",Integer.toString(R.drawable.mashable)));
+        fml.add(new FeedModel("Mashable","http://feeds.mashable.com/Mashable",Integer.toString(R.drawable.xataka)));
         return fml;
     }
 
@@ -204,7 +206,9 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
         if (payment) {
             // item clicked
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
             i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
+            i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
             startActivity(i);
         }
         else{
