@@ -361,7 +361,7 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
              */
 
         SharedPreferences.Editor spe = getPreferences(MODE_PRIVATE).edit();
-        spe.putBoolean("standard", payment);
+        spe.putBoolean("payment", payment);
         spe.apply();
         Log.d(TAG, "Saved data: payment = " + String.valueOf(payment));
     }

@@ -66,7 +66,31 @@ public class MainActivity extends AppCompatActivity {
         // Obtener la lista
         listView = (ListView)findViewById(R.id.lista);
 
-        Log.d(TAG, "sea");
+        // Regisgrar escucha de la lista
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor c = (Cursor) adapter.getItem(position);
+
+                // Obtene url de la entrada seleccionada
+                String url = c.getString(c.getColumnIndex(ScriptDatabase.ColumnEntradas.URL));
+
+                // Nuevo intent explícito
+                Intent i = new Intent(MainActivity.this, DetailActivity.class);
+
+                // Setear url
+                i.putExtra("url-extra", url);
+
+                // Iniciar actividad
+                startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    protected void onStart(){
+
+        super.onStart();
 
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -105,29 +129,6 @@ public class MainActivity extends AppCompatActivity {
                     SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             listView.setAdapter(adapter);
         }
-
-
-
-
-        // Regisgrar escucha de la lista
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor c = (Cursor) adapter.getItem(position);
-
-                // Obtene url de la entrada seleccionada
-                String url = c.getString(c.getColumnIndex(ScriptDatabase.ColumnEntradas.URL));
-
-                // Nuevo intent expl�cito
-                Intent i = new Intent(MainActivity.this, DetailActivity.class);
-
-                // Setear url
-                i.putExtra("url-extra", url);
-
-                // Iniciar actividad
-                startActivity(i);
-            }
-        });
     }
 
     public class LoadData extends AsyncTask<Void, Void, Cursor> {
