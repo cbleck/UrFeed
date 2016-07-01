@@ -37,14 +37,18 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
 
     static final String TAG = "UrFeed";
 
-    private boolean payment;
+    private boolean payment1, payment2, payment3, payment4, paymentpro;
     // The helper object
     private IabHelper mHelper;
     // Provides purchase notification while this app is running
     IabBroadcastReceiver mBroadcastReceiver;
 
     // SKUs for our products: the premium upgrade (non-consumable) and gas (consumable)
-    static final String SKU_STANDARD = "standard";
+    static final String SKU_STANDARD1 = "standard1";
+    static final String SKU_STANDARD2 = "standard2";
+    static final String SKU_STANDARD3 = "standard3";
+    static final String SKU_STANDARD4 = "standard4";
+    static final String SKU_PRO = "pro";
 
     // (arbitrary) request code for the purchase flow
     static final int RC_REQUEST = 10001;
@@ -175,13 +179,53 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
             // Do we have the premium upgrade?
 
             // Check for gas delivery -- if we own gas, we should fill up the tank immediately
-            Purchase gasPurchase = inventory.getPurchase(SKU_STANDARD);
-            if (gasPurchase != null && verifyDeveloperPayload(gasPurchase)) {
-                Log.d(TAG, "We have payement. Consuming it.");
+            Purchase standard1Purchase = inventory.getPurchase(SKU_STANDARD1);
+            Purchase standard2Purchase = inventory.getPurchase(SKU_STANDARD2);
+            Purchase standard3Purchase = inventory.getPurchase(SKU_STANDARD3);
+            Purchase standard4Purchase = inventory.getPurchase(SKU_STANDARD3);
+            Purchase proPurchase = inventory.getPurchase(SKU_PRO);
+            if (standard1Purchase != null && verifyDeveloperPayload(standard1Purchase)) {
+                Log.d(TAG, "We have payement1. Consuming it.");
                 try {
-                    mHelper.consumeAsync(inventory.getPurchase(SKU_STANDARD), mConsumeFinishedListener);
+                    mHelper.consumeAsync(inventory.getPurchase(SKU_STANDARD1), mConsumeFinishedListener);
                 } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error consuming payment. Another async operation in progress.");
+                    complain("Error consuming payment1. Another async operation in progress.");
+                }
+                return;
+            }
+            else if (standard2Purchase != null && verifyDeveloperPayload(standard2Purchase)) {
+                Log.d(TAG, "We have payement2. Consuming it.");
+                try {
+                    mHelper.consumeAsync(inventory.getPurchase(SKU_STANDARD2), mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming payment2. Another async operation in progress.");
+                }
+                return;
+            }
+            else if (standard3Purchase != null && verifyDeveloperPayload(standard3Purchase)) {
+                Log.d(TAG, "We have payement3. Consuming it.");
+                try {
+                    mHelper.consumeAsync(inventory.getPurchase(SKU_STANDARD3), mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming payment3. Another async operation in progress.");
+                }
+                return;
+            }
+            else if (standard4Purchase != null && verifyDeveloperPayload(standard4Purchase)) {
+                Log.d(TAG, "We have payement4. Consuming it.");
+                try {
+                    mHelper.consumeAsync(inventory.getPurchase(SKU_STANDARD4), mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming payment4. Another async operation in progress.");
+                }
+                return;
+            }
+            else if (proPurchase != null && verifyDeveloperPayload(proPurchase)) {
+                Log.d(TAG, "We have payementpro. Consuming it.");
+                try {
+                    mHelper.consumeAsync(inventory.getPurchase(SKU_PRO), mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming payementpro. Another async operation in progress.");
                 }
                 return;
             }
@@ -204,31 +248,144 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
 
     public void onClickFeed(int position, List<FeedModel> mDataset){
 
-        if (true) {
-            // item clicked
-            Intent i = new Intent(this, MainActivity.class);
-            i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
-            i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
-            i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
-            startActivity(i);
-        }
-        else{
-            // launch the gas purchase UI flow.
-            // We will be notified of completion via mPurchaseFinishedListener
-            setWaitScreen(true);
-            Log.d(TAG, "Launching purchase flow for gas.");
+        if(position == 0) {
+            if (payment1) {
+                // item clicked
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
+                i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
+                i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
+                startActivity(i);
+            } else {
+                // launch the gas purchase UI flow.
+                // We will be notified of completion via mPurchaseFinishedListener
+                setWaitScreen(true);
+                Log.d(TAG, "Launching purchase flow for payment1.");
 
                         /* TODO: for security, generate your payload here for verification. See the comments on
                          *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
                          *        an empty string, but on a production app you should carefully generate this. */
-            String payload = "";
+                String payload = "";
 
-            try {
-                mHelper.launchPurchaseFlow(this, SKU_STANDARD, RC_REQUEST,
-                        mPurchaseFinishedListener, payload);
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                complain("Error launching purchase flow. Another async operation in progress.");
-                setWaitScreen(false);
+                try {
+                    mHelper.launchPurchaseFlow(this, SKU_STANDARD1, RC_REQUEST,
+                            mPurchaseFinishedListener, payload);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error launching purchase flow. Another async operation in progress.");
+                    setWaitScreen(false);
+                }
+            }
+        }
+        if(position == 1) {
+            if (payment2) {
+                // item clicked
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
+                i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
+                i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
+                startActivity(i);
+            } else {
+                // launch the gas purchase UI flow.
+                // We will be notified of completion via mPurchaseFinishedListener
+                setWaitScreen(true);
+                Log.d(TAG, "Launching purchase flow for payment2.");
+
+                        /* TODO: for security, generate your payload here for verification. See the comments on
+                         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+                         *        an empty string, but on a production app you should carefully generate this. */
+                String payload = "";
+
+                try {
+                    mHelper.launchPurchaseFlow(this, SKU_STANDARD2, RC_REQUEST,
+                            mPurchaseFinishedListener, payload);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error launching purchase flow. Another async operation in progress.");
+                    setWaitScreen(false);
+                }
+            }
+        }
+        if(position == 2) {
+            if (payment3) {
+                // item clicked
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
+                i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
+                i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
+                startActivity(i);
+            } else {
+                // launch the gas purchase UI flow.
+                // We will be notified of completion via mPurchaseFinishedListener
+                setWaitScreen(true);
+                Log.d(TAG, "Launching purchase flow for payment3.");
+
+                        /* TODO: for security, generate your payload here for verification. See the comments on
+                         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+                         *        an empty string, but on a production app you should carefully generate this. */
+                String payload = "";
+
+                try {
+                    mHelper.launchPurchaseFlow(this, SKU_STANDARD3, RC_REQUEST,
+                            mPurchaseFinishedListener, payload);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error launching purchase flow. Another async operation in progress.");
+                    setWaitScreen(false);
+                }
+            }
+        }
+        if(position == 3) {
+            if (payment4) {
+                // item clicked
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
+                i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
+                i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
+                startActivity(i);
+            } else {
+                // launch the gas purchase UI flow.
+                // We will be notified of completion via mPurchaseFinishedListener
+                setWaitScreen(true);
+                Log.d(TAG, "Launching purchase flow for payment4.");
+
+                        /* TODO: for security, generate your payload here for verification. See the comments on
+                         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+                         *        an empty string, but on a production app you should carefully generate this. */
+                String payload = "";
+
+                try {
+                    mHelper.launchPurchaseFlow(this, SKU_STANDARD4, RC_REQUEST,
+                            mPurchaseFinishedListener, payload);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error launching purchase flow. Another async operation in progress.");
+                    setWaitScreen(false);
+                }
+            }
+        }
+        if(position == 4) {
+            if (paymentpro) {
+                // item clicked
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
+                i.putExtra("com.bleck.feedurl", mDataset.get(position).getLink());
+                i.putExtra("com.bleck.feedimg", Integer.parseInt(mDataset.get(position).getBckImg()));
+                startActivity(i);
+            } else {
+                // launch the gas purchase UI flow.
+                // We will be notified of completion via mPurchaseFinishedListener
+                setWaitScreen(true);
+                Log.d(TAG, "Launching purchase flow for paymentpro.");
+
+                        /* TODO: for security, generate your payload here for verification. See the comments on
+                         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+                         *        an empty string, but on a production app you should carefully generate this. */
+                String payload = "";
+
+                try {
+                    mHelper.launchPurchaseFlow(this, SKU_PRO, RC_REQUEST,
+                            mPurchaseFinishedListener, payload);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error launching purchase flow. Another async operation in progress.");
+                    setWaitScreen(false);
+                }
             }
         }
 
@@ -268,13 +425,57 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
 
             Log.d(TAG, "Purchase successful.");
 
-            if (purchase.getSku().equals(SKU_STANDARD)) {
+            if (purchase.getSku().equals(SKU_STANDARD1)) {
                 // bought 1/4 tank of gas. So consume it.
-                Log.d(TAG, "Purchase is standard. Starting standard consumption.");
+                Log.d(TAG, "Purchase is standard. Starting standard1 consumption.");
                 try {
                     mHelper.consumeAsync(purchase, mConsumeFinishedListener);
                 } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error consuming standar. Another async operation in progress.");
+                    complain("Error consuming standard1. Another async operation in progress.");
+                    setWaitScreen(false);
+                    return;
+                }
+            }
+            if (purchase.getSku().equals(SKU_STANDARD2)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is standard. Starting standard2 consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming standard2. Another async operation in progress.");
+                    setWaitScreen(false);
+                    return;
+                }
+            }
+            if (purchase.getSku().equals(SKU_STANDARD3)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is standard. Starting standard3 consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming standard3. Another async operation in progress.");
+                    setWaitScreen(false);
+                    return;
+                }
+            }
+            if (purchase.getSku().equals(SKU_STANDARD4)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is standard. Starting standard4 consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming standard4. Another async operation in progress.");
+                    setWaitScreen(false);
+                    return;
+                }
+            }
+            if (purchase.getSku().equals(SKU_PRO)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is standard. Starting pro consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming pro. Another async operation in progress.");
                     setWaitScreen(false);
                     return;
                 }
@@ -297,9 +498,19 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Consumption successful. Provisioning.");
-                payment = true;
+
+                if(purchase.getSku()==SKU_STANDARD1)
+                    payment1 = true;
+                if(purchase.getSku()==SKU_STANDARD2)
+                    payment2 = true;
+                if(purchase.getSku()==SKU_STANDARD3)
+                    payment3 = true;
+                if(purchase.getSku()==SKU_STANDARD4)
+                    payment4 = true;
+                if(purchase.getSku()==SKU_PRO)
+                    paymentpro = true;
                 saveData();
-                alert("You got now access to UrFeed!");
+                alert("You got now access to UrFeed! <"+purchase.getSku()+">");
             }
             else {
                 complain("Error while consuming: " + result);
@@ -366,15 +577,31 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
              */
 
         SharedPreferences.Editor spe = getPreferences(MODE_PRIVATE).edit();
-        spe.putBoolean("payment", payment);
+        spe.putBoolean("payment1", payment1);
+        spe.putBoolean("payment2", payment2);
+        spe.putBoolean("payment3", payment3);
+        spe.putBoolean("payment4", payment4);
+        spe.putBoolean("paymentpro", paymentpro);
         spe.apply();
-        Log.d(TAG, "Saved data: payment = " + String.valueOf(payment));
+        Log.d(TAG, "Saved data: payment1 = " + String.valueOf(payment1));
+        Log.d(TAG, "Saved data: payment2 = " + String.valueOf(payment2));
+        Log.d(TAG, "Saved data: payment3 = " + String.valueOf(payment3));
+        Log.d(TAG, "Saved data: payment4 = " + String.valueOf(payment4));
+        Log.d(TAG, "Saved data: paymentpro = " + String.valueOf(paymentpro));
     }
 
     void loadData() {
         SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        payment = sp.getBoolean("payment", false);
-        Log.d(TAG, "Loaded data: payment = " + String.valueOf(payment));
+        payment1 = sp.getBoolean("payment1", false);
+        payment2 = sp.getBoolean("payment2", false);
+        payment3 = sp.getBoolean("payment3", false);
+        payment4 = sp.getBoolean("payment4", false);
+        paymentpro = sp.getBoolean("paymentpro", false);
+        Log.d(TAG, "Loaded data: payment1 = " + String.valueOf(payment1));
+        Log.d(TAG, "Loaded data: payment2 = " + String.valueOf(payment2));
+        Log.d(TAG, "Loaded data: payment3 = " + String.valueOf(payment3));
+        Log.d(TAG, "Loaded data: payment4 = " + String.valueOf(payment4));
+        Log.d(TAG, "Loaded data: paymentpro = " + String.valueOf(paymentpro));
     }
 
     // Enables or disables the "please wait" screen.
