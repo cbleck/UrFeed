@@ -3,6 +3,7 @@ package com.bleck.urfeed.UI;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,8 +90,8 @@ public class FeedAdapter extends CursorAdapter {
 
         // Acortar descripción a 77 caracteres
         if (ln >= 150)
-            vh.descripcion.setText(descripcion.substring(0, 150)+"...");
-        else vh.descripcion.setText(descripcion);
+            vh.descripcion.setText(Html.fromHtml(descripcion.substring(0, 150))+"...");
+        else vh.descripcion.setText(Html.fromHtml(descripcion));
 
         // Obtener URL de la imagen
         String thumbnailUrl = cursor.getString(vh.imagenI);

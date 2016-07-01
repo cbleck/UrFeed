@@ -146,6 +146,7 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
         fml.add(new FeedModel("Hipertextual","http://feed.hipertextual.com/",Integer.toString(R.drawable.hipertextual)));
         fml.add(new FeedModel("Xataka","http://feeds.weblogssl.com/xataka2",Integer.toString(R.drawable.mashable)));
         fml.add(new FeedModel("Mashable","http://feeds.mashable.com/Mashable",Integer.toString(R.drawable.xataka)));
+        fml.add(new FeedModel("Wired","http://www.wired.com/feed/",Integer.toString(R.drawable.wired)));
         return fml;
     }
 
@@ -203,7 +204,7 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
 
     public void onClickFeed(int position, List<FeedModel> mDataset){
 
-        if (payment) {
+        if (true) {
             // item clicked
             Intent i = new Intent(this, MainActivity.class);
             i.putExtra("com.bleck.feedname", mDataset.get(position).getName());
@@ -273,7 +274,7 @@ public class SelectFeed extends AppCompatActivity implements IabBroadcastReceive
                 try {
                     mHelper.consumeAsync(purchase, mConsumeFinishedListener);
                 } catch (IabHelper.IabAsyncInProgressException e) {
-                    complain("Error consuming gas. Another async operation in progress.");
+                    complain("Error consuming standar. Another async operation in progress.");
                     setWaitScreen(false);
                     return;
                 }
