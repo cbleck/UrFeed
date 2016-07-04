@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bleck.urfeed">
+    package="com.it.dfeed">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,18 +14,18 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.bleck.urfeed.UI.MainActivity"
+            android:name="com.it.dfeed.UI.MainActivity"
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name="com.bleck.urfeed.UI.DetailActivity"
+            android:name="com.it.dfeed.UI.DetailActivity"
             android:label="@string/title_activity_detail"
-            android:parentActivityName="com.bleck.urfeed.UI.MainActivity">
+            android:parentActivityName="com.it.dfeed.UI.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.bleck.urfeed.UI.MainActivity" />
+                android:value="com.it.dfeed.UI.MainActivity" />
         </activity>
-        <activity android:name="com.bleck.urfeed.UI.SelectFeed">
+        <activity android:name="com.it.dfeed.UI.SelectFeed">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

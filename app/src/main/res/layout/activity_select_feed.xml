@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bleck.urfeed.UI.SelectFeed">
+    tools:context="com.it.dfeed.UI.SelectFeed">
 
     <ImageView
         android:id="@+id/screen_wait"

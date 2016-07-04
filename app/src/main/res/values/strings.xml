@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UrFeed</string>
+    <string name="app_name">DFeed</string>
     <string name="title_activity_detail">Detalle</string>
     <string name="title_activity_select_feed">SelectFeed</string>
     <string name="content_description_app_loading_image">App loading image</string>
